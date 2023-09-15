@@ -24,25 +24,25 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		if isInitial {
 			rootNode = &resNode
 			currentNode = rootNode
-            isInitial = false
+			isInitial = false
 		} else {
 			currentNode.Next = &resNode
 			currentNode = currentNode.Next
 		}
-		
+
 		if l1 != nil {
 			l1 = l1.Next
 		}
-		
+
 		if l2 != nil {
 			l2 = l2.Next
 		}
 
 		if l1 == nil && l2 == nil {
-            if carryOver == 1 {
+			if carryOver == 1 {
 				currentNode.Next = &ListNode{Val: carryOver}
 			}
-            
+
 			break
 		}
 	}
