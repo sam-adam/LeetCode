@@ -53,13 +53,13 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 		}
 
 		if p1+1 > lenNums1 {
-			return float64((float64(nums2[p2+1]) + float64(numPre)) / 2)
+			return (float64(nums2[p2+1]) + float64(numPre)) / 2.0
 		} else if p2+1 > lenNums2 {
-			return float64((float64(nums1[p1+1]) + float64(numPre)) / 2)
+			return (float64(nums1[p1+1]) + float64(numPre)) / 2.0
 		} else if nums1[p1+1] < nums2[p2+1] {
-			return float64((float64(nums1[p1+1]) + float64(numPre)) / 2)
+			return (float64(nums1[p1+1]) + float64(numPre)) / 2.0
 		} else {
-			return float64((float64(nums2[p2+1]) + float64(numPre)) / 2)
+			return (float64(nums2[p2+1]) + float64(numPre)) / 2.0
 		}
 	}
 }
