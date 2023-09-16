@@ -1,14 +1,18 @@
 
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	totalLen := len(nums1) + len(nums2)
-	isOdd := totalLen%2 == 1
+	isOdd := totalLen%2 == 1 // we will separate odd / even solution for execution time's sake
 	lenNums1 := len(nums1) - 1
 	lenNums2 := len(nums2) - 1
 
+  // first we start both pointers to -1, which we will increment
+  // by 1 for each step, depends on which is lower and have next
+  // element
 	p1 := -1
 	p2 := -1
 
 	if isOdd {
+    // for odd m+n, we will traverse just until ((m+n)/2) - 1
 		medianIdx := int(math.Floor(float64(totalLen) / 2.0))
 
 		for i := 0; i < medianIdx; i++ {
