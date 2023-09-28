@@ -2,7 +2,7 @@ func longestPalindrome(s string) string {
 	if len(s) == 1 {
 		return s
 	}
-	
+
 	chars := make([]string, (2*len(s))+1)
 
 	chars[0] = "#"
@@ -23,20 +23,13 @@ func longestPalindrome(s string) string {
 
 	for center < len(s1) {
 		radius := 0
-		leftBound := center - (radius + 1)
-		rightBound := center + (radius + 1)
 
-		for leftBound >= 0 && rightBound < len(s1) && s1[leftBound] == s1[rightBound] {
-			radius++
-
-			palin := s1[leftBound:rightBound+1]
-
-			if len(palin) > len(maxPalin) {
-				maxPalin = palin
+		for center - (radius + 1) >= 0 && center + (radius + 1) < len(s1) && s1[center - (radius + 1)] == s1[center + (radius + 1)] {
+			if len(s1[center - (radius + 1):center + (radius + 1)+1]) > len(maxPalin) {
+				maxPalin = s1[center - (radius + 1):center + (radius + 1)+1]
 			}
 
-			leftBound = center - (radius + 1)
-			rightBound = center + (radius + 1)
+			radius++
 		}
 
 		center++
