@@ -2,7 +2,7 @@ func longestPalindrome(s string) string {
 	if len(s) == 1 {
 		return s
 	}
-	
+
 	chars := make([]string, (2*len(s))+1)
 
 	chars[0] = "#"
@@ -19,28 +19,54 @@ func longestPalindrome(s string) string {
 	s1 := strings.Join(chars, "")
 
 	center := 0
-	maxPalin := ""
+	radius := 0
+	radiuses := make([]int, len(s1))
 
 	for center < len(s1) {
-		radius := 0
 		leftBound := center - (radius + 1)
 		rightBound := center + (radius + 1)
 
 		for leftBound >= 0 && rightBound < len(s1) && s1[leftBound] == s1[rightBound] {
 			radius++
 
-			palin := s1[leftBound:rightBound+1]
-
-			if len(palin) > len(maxPalin) {
-				maxPalin = palin
-			}
-
 			leftBound = center - (radius + 1)
 			rightBound = center + (radius + 1)
 		}
 
+		radiuses[center] = radius
+
+		oldCenter := center
+		oldRadius := radius
+
 		center++
+		radius = 0
+
+		for center <= oldCenter + oldRadius {
+			mirroredCenter := oldCenter - (center - oldCenter)
+			maxMirroredRadius := oldCenter + oldRadius - center
+
+			if radiuses[mirroredCenter] < maxMirroredRadius {
+				radiuses[center] = radiuses[mirroredCenter]
+				center++
+			} else if radiuses[mirroredCenter] > maxMirroredRadius {
+				radiuses[center] = maxMirroredRadius
+				center++
+			} else {
+				radius = maxMirroredRadius
+				break
+			}
+		}
 	}
 
-	return strings.Join(strings.Split(maxPalin, "#"), "")
+	maxC := 0
+
+	for c, r := range radiuses {
+		if r > radiuses[maxC] {
+			maxC = c
+		}
+	}
+
+	palin := s1[maxC - radiuses[maxC]:maxC + radiuses[maxC] + 1]
+
+	return strings.Join(strings.Split(palin, "#"), "")
 }
