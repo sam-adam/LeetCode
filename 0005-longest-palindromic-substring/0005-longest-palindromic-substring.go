@@ -1,40 +1,46 @@
 func longestPalindrome(s string) string {
-	longest := ""
-	longestLen := 0
+	if len(s) == 1 {
+		return s
+	}
+	
+	chars := make([]string, (2*len(s))+1)
 
-	for leftIdx := range s {
-		for rightIdx := len(s) - 1; rightIdx >= leftIdx + longestLen; rightIdx-- {
-			if !checkIsPalindrome(s, leftIdx, rightIdx) {
-				continue
-			}
+	chars[0] = "#"
+	chars[len(chars)-1] = "#"
 
-			palinLen := rightIdx + 1 - leftIdx
+	for i, c := range s {
+		chars[2*i] = string(c)
 
-			if palinLen > longestLen {
-				longest = s[leftIdx:rightIdx+1]
-				longestLen = palinLen
-			}
-
-			break
+		if i < len(s)-1 {
+			chars[2*i+1] = "#"
 		}
 	}
 
-	return longest
-}
+	s1 := strings.Join(chars, "")
 
-func checkIsPalindrome(s string, leftIdx int, rightIdx int) bool {
-	isMirrorMatch := s[leftIdx] == s[rightIdx]
+	center := 0
+	maxPalin := ""
 
-	for rightIdx > leftIdx {
-		if !isMirrorMatch {
-			return false
+	for center < len(s1) {
+		radius := 0
+		leftBound := center - (radius + 1)
+		rightBound := center + (radius + 1)
+
+		for leftBound >= 0 && rightBound < len(s1) && s1[leftBound] == s1[rightBound] {
+			radius++
+
+			palin := s1[leftBound:rightBound+1]
+
+			if len(palin) > len(maxPalin) {
+				maxPalin = palin
+			}
+
+			leftBound = center - (radius + 1)
+			rightBound = center + (radius + 1)
 		}
 
-		leftIdx += 1
-		rightIdx -= 1
-
-		isMirrorMatch = s[leftIdx] == s[rightIdx]
+		center++
 	}
 
-	return true
+	return strings.Join(strings.Split(maxPalin, "#"), "")
 }
