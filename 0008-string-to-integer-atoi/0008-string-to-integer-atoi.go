@@ -49,8 +49,6 @@ func myAtoi(s string) int {
 		}
 	}
 
-	fmt.Println(fmt.Sprintf("N = %s, Result = %d, OF: %s", s, result, isOverflow))
-
 	if negativeMultiplier == -1 && result > math.MaxInt32 {
 		return math.MinInt32
 	}
