@@ -13,8 +13,6 @@ func isPalindrome(x int) bool {
 	left := center
 	right := center
 
-	fmt.Println(fmt.Sprintf("s = %s", s1))
-
 	for left > 0 {
 		if string(s1[left]) != string(s1[right]) {
 			return false
