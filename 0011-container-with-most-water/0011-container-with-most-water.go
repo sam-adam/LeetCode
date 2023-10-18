@@ -18,30 +18,6 @@ func maxArea(height []int) int {
 		}
 	}
 
-	// for i := 0; i < heightLen - 1; i++ {
-	// 	for j := i + 1; j < heightLen; j++ {
-	//         if height[j] > height[i] && height[j-1] < height[i] && height[j-1] - height[i] > j-i {
-	// 			i = j - 1
-	// 		}
-
-	// 		iHeight := height[i]
-	// 		jHeight := height[j]
-	// 		shortest := iHeight
-
-	// 		if jHeight < iHeight {
-	// 			shortest = jHeight
-	// 		}
-
-	// 		area := (j - i) * shortest
-
-	//         // fmt.Println(fmt.Sprintf("i: %d, j: %d, iHeight: %d, jHeight: %d, area: %d, maxArea: %d", i, j, iHeight, jHeight, area, maxArea))
-
-	// 		if area > maxArea {
-	// 			maxArea = area
-	// 		}
-	// 	}
-	// }
-
 	return maxArea
 }
 
