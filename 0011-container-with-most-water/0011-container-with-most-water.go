@@ -25,8 +25,6 @@ func calculateArea(height []int, i int, j int) int {
 	if height[i] < height[j] {
 		return (j - i) * height[i]
 	} else {
-		{
-			return (j - i) * height[j]
-		}
+		return (j - i) * height[j]
 	}
 }
