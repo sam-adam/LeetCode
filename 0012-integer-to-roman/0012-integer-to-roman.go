@@ -19,10 +19,9 @@ func intToRoman(num int) string {
 	result := ""
 
 	for _, i := range nums {
-		for num >= i {
-			result = result + numMap[i]
-			num -= i
-		}
+		times := math.Floor(float64(num / i))
+		result = result + strings.Repeat(numMap[i], int(times))
+		num -= int(i * int(times))
 	}
 
 	return result
